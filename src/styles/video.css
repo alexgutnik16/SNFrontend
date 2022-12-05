@@ -1,0 +1,40 @@
+.video {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.video-data {
+    margin: 50px;
+}
+
+.video-user {
+    margin: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.video-user img {
+    margin-right: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 30px;
+    border: 2px solid;
+    border-color: #BB2649;
+}
+
+.video-user button {
+    margin: 10px;
+}
+
+.video-info {
+    padding: 30px;
+    border-radius: 20px;
+    border: 3px solid;
+    border-color: #BB2649;
+}
+
+.video-info h3 {
+    text-align: left;
+}
