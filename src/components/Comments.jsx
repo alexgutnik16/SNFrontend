@@ -2,12 +2,13 @@ import React from "react";
 
 import '../styles/comments.css'
 
-function Comments () {
+function Comments(props) {
+
+    const comments = props.comments.comments.comments;
+    
     return(
         <div className="comments">
-            <p>Comment 1</p>
-            <p>Comment 2</p>
-            <p>Comment 3</p>
+            {comments.map(comment => <p>{ comment }</p>)}
         </div>
     )
 }

@@ -1,17 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 
 import Video from "./Video";
+import api from '../api/GetData';
+import { setSubVideos } from "../redux/actions/videoActions";
 import '../styles/subto-posts.css';
 
 
 function SubPosts() {
+    const subVideos = useSelector((state) => state.subVideos.videos);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        let data = api.getSubVideos()
+        dispatch(setSubVideos(data))
+    }, []);
+
     return(
-        <div className="posts">
-            <h3>Sub Posts</h3>
-            <Video id='1'/>
-            <Video id='2'/>
-            <Video id='3'/>
-            <Video id='4'/>
+        <div className="container">
+            <div className="posts">
+                {subVideos.map(video => <Video video={video} key={video.id}/>)}
+            </div>
         </div>
     )
 }

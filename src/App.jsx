@@ -1,10 +1,12 @@
 import React, { Fragment } from "react";
 import { Route, Routes } from 'react-router-dom';
 
+import VideoDetail from "./components/VideoDetail";
 import Header from "./components/Header";
 import SubPosts from "./components/SubPosts";
 import RecPosts from "./components/RecPosts";
 import Profile from "./components/Profile";
+import Search from "./components/Search";
 
 import "./App.css";
 
@@ -15,7 +17,10 @@ function App() {
             <Routes>
                 <Route path="/" element={<RecPosts/>} />
                 <Route path='/subposts' element={<SubPosts/>}/>
-                <Route path='/profile' element={<Profile/>}/>
+                <Route path='/search' element={<Search/>}/>
+                <Route path='/profile/:userId' element={<Profile/>}/>
+                <Route path='/video_detail/:videoId' element={<VideoDetail/>}/>
+                <Route>404 not found</Route>
             </Routes>
         </Fragment>
   	);

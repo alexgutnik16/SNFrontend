@@ -1,0 +1,21 @@
+.container {
+    margin: auto;
+    width: 80%;
+}
+
+.search-input {
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search input {
+    margin-left: 50px;
+    padding: 10px;
+    font-size: 24px;
+    border: 2px solid;
+    border-color: #BB2649;
+    border-radius: 10px;
+    outline: none;
+}
