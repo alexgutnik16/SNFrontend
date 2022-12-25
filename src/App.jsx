@@ -7,6 +7,8 @@ import SubPosts from "./components/SubPosts";
 import RecPosts from "./components/RecPosts";
 import Profile from "./components/Profile";
 import Search from "./components/Search";
+import Upload from "./components/Upload";
+import ScrollToTop from "./components/ScrollToTop";
 
 import "./App.css";
 
@@ -14,13 +16,14 @@ function App() {
 	return (
         <Fragment>
             <Header/>
+            <ScrollToTop/>
             <Routes>
                 <Route path="/" element={<RecPosts/>} />
                 <Route path='/subposts' element={<SubPosts/>}/>
                 <Route path='/search' element={<Search/>}/>
                 <Route path='/profile/:userId' element={<Profile/>}/>
                 <Route path='/video_detail/:videoId' element={<VideoDetail/>}/>
-                <Route>404 not found</Route>
+                <Route path='/upload' element={<Upload/>}/>
             </Routes>
         </Fragment>
   	);

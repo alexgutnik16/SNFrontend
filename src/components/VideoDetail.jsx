@@ -53,7 +53,7 @@ function VideoDetail() {
                 <div className="video">
                     <div className="video-main">
                         <div className="video-user">
-                            <Link className="video-user-link" to='/profile'>
+                            <Link className="video-user-link" to={'/profile/' + video.videos.id}>
                                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/White_box_55x90.png/1280px-White_box_55x90.png" alt='avatar'></img> 
                                 <h2>{ video.videos.user }</h2>
                             </Link>  
@@ -73,8 +73,8 @@ function VideoDetail() {
                         </div>
                         {Object.keys(comments).length === 0  ? (
                             <div className="no-data">
-                            <h2>No data</h2>
-                        </div>
+                                <h2>No data</h2>
+                            </div>
                         ) : (
                             <Comments comments={comments} key={videoId}/>
                         )}

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Video from "./Video";
 import api from '../api/GetData';
 import { setSubVideos } from "../redux/actions/videoActions";
-import '../styles/subto-posts.css';
+import '../styles/posts.css';
 
 
 function SubPosts() {
@@ -17,10 +17,8 @@ function SubPosts() {
     }, []);
 
     return(
-        <div className="container">
-            <div className="posts">
-                {subVideos.map(video => <Video video={video} key={video.id}/>)}
-            </div>
+        <div className="posts">
+            {subVideos.map(video => <Video video={video} key={video.id}/>)}
         </div>
     )
 }

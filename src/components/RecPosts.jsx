@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Video from "./Video";
 import api from '../api/GetData';
 import { setRecVideos } from '../redux/actions/videoActions';
-import "../styles/rec-posts.css";
+import "../styles/posts.css";
 
 
 function RecPosts() {
@@ -17,10 +17,8 @@ function RecPosts() {
     }, []);
 
     return(
-        <div className="container">
-            <div className="posts">
-                {recVideos.map(video => <Video video={video} key={video.id}/>)}
-            </div>
+        <div className="posts">
+            {recVideos.map(video => <Video video={video} key={video.id}/>)}
         </div>
     )
 }

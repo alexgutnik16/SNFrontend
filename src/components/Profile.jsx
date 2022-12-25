@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
-import { useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { Link, useParams } from 'react-router-dom';
+import { useSelector } from "react-redux";
 
-import { setUser, removeUser, setCurrentUser } from "../redux/actions/userActions";
 import api from '../api/GetData';
 import "../styles/profile.css"
 
@@ -10,22 +9,7 @@ import "../styles/profile.css"
 function Profile() {
 
     let currentUser = useSelector((state) => state.currentUser.currentUser);
-    let user = useSelector((state) => state.user);
-
     let { userId } = useParams();
-    const dispatch = useDispatch();
-
-    // useEffect(() => {
-    //     if (userId && userId !== "") {
-    //         let data = api.getUser(userId);
-    //         dispatch(setUser(data));
-    //     }
-    //     return () => {
-    //         dispatch(removeUser());
-    //     };
-    // }, [userId]);
-
-    // console.log()
   
     let data = api.getUser(userId);
     let users = api.getUsers();
@@ -34,36 +18,92 @@ function Profile() {
         <div className="user">
             {(data === currentUser.nickname) ? (
                 <div className="profile">
-                    <h1>MY PROFILE</h1>
-                    <h2>{ data }</h2>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/White_box_55x90.png/1280px-White_box_55x90.png" alt='avatar'></img>
-                    <div className="subscribtions">
-                        {users.map(user => 
-                            <div key={user.id} className="subscribtion">
-                                <p>{user.nickaname}</p>
-                                <button>Unsubscribe</button>
-                                <button>Unsubscribe</button>
-                                <button>Ban</button>
-                            </div>
-                        )}
+                    <div className="profile-main">
+                        <h3>My profile</h3>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/White_box_55x90.png/1280px-White_box_55x90.png" alt='avatar'></img>
+                        <h2>{ data }</h2>
                     </div>
-                    <div className="upload-video">
-                        <button>+ Upload</button>
+                    <div className="profile-add">
+                        <div className="profile-button">
+                            <Link to='/upload'>
+                                <button>+ Upload video</button>
+                            </Link>
+                        </div>
+                        <div className="subscribtions">
+                            <h2>Subscribtions</h2>
+                            {users.map(user =>
+                                <div key={user.id} className="subscribtion">
+                                    <Link className="video-user-link" to={'/profile/' + user.id}>
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/White_box_55x90.png/1280px-White_box_55x90.png" alt='avatar'></img>
+                                        <p>{ user.nickname }</p>
+                                    </Link>
+                                    <div className="subscribtion-actions">
+                                        <button>Subscribed</button>
+                                        <button>Ban</button>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                        <div className="subscribtions">
+                            <h2>Subscribed</h2>
+                            {users.map(user =>
+                                <div key={user.id} className="subscribtion">
+                                    <Link className="video-user-link" to={'/profile/' + user.id}>
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/White_box_55x90.png/1280px-White_box_55x90.png" alt='avatar'></img>
+                                        <p>{ user.nickname }</p>
+                                    </Link>
+                                    <div className="subscribtion-actions">
+                                        <button>Subscribed</button>
+                                        <button>Ban</button>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
             ) : (
                 <div className="profile">
-                    <h2>{ data }</h2>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/White_box_55x90.png/1280px-White_box_55x90.png" alt='avatar'></img>
-                    <div className="subscribtions">
-                        {users.map(user => 
-                            <div key={user.id} className="subscribtion">
-                                <p>{user.nickaname}</p>
-                                <button>Unsubscribe</button>
-                                <button>Unsubscribe</button>
-                                <button>Ban</button>
-                            </div>
-                        )}
+                    <div className="profile-main">
+                        <h3>Profile</h3>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/White_box_55x90.png/1280px-White_box_55x90.png" alt='avatar'></img>
+                        <h2>{ data }</h2>
+                    </div>
+                    <div className="profile-add">
+                        <div className="profile-button">
+                            <Link to='/'>
+                                <button>Text { data }</button>
+                            </Link>
+                        </div>
+                        <div className="subscribtions">
+                            <h2>Subscribtions</h2>
+                            {users.map(user =>
+                                <div key={user.id} className="subscribtion">
+                                    <Link className="video-user-link" to={'/profile/' + user.id}>
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/White_box_55x90.png/1280px-White_box_55x90.png" alt='avatar'></img>
+                                        <p>{ user.nickname }</p>
+                                    </Link>
+                                    <div className="subscribtion-actions">
+                                        <button>Subscribed</button>
+                                        <button>Ban</button>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                        <div className="subscribtions">
+                            <h2>Subscribed</h2>
+                            {users.map(user =>
+                                <div key={user.id} className="subscribtion">
+                                    <Link className="video-user-link" to={'/profile/' + user.id}>
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/White_box_55x90.png/1280px-White_box_55x90.png" alt='avatar'></img>
+                                        <p>{ user.nickname }</p>
+                                    </Link>
+                                    <div className="subscribtion-actions">
+                                        <button>Subscribed</button>
+                                        <button>Ban</button>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
             )}

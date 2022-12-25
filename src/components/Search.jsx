@@ -41,10 +41,8 @@ function Search() {
                     value={inputSearch}
                 />
             </div>
-            <div className='container'>
-                <div className="posts">
-                    {filteredData.map(video => <Video video={video} key={video.id}/>)}
-                </div>
+            <div className="posts">
+                {filteredData.map(video => <Video video={video} key={video.id}/>)}
             </div>
         </div>      
     )

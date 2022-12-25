@@ -25,13 +25,13 @@ export const users = [{
     'nickname': 'Alex'
 }, {
     'id': 2,
-    'nickaname': 'Bob'
+    'nickname': 'Bob'
 }, {
     'id': 3,
-    'nickaname': 'Tom'
+    'nickname': 'Tom'
 }, {
     'id': 4,
-    'nickaname': 'Oleg'
+    'nickname': 'Oleg'
 }];
 
 export const comments = [{

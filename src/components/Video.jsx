@@ -1,16 +1,10 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 
-import api from '../api/GetData';
 import '../styles/video.css';
 
 
 function Video(props) {
-
-    function like() {
-        document.getElementById("like").style.backgroundColor = "#BB2649";
-    }
-
     return(
         <div className="video">
             <div className="video-main">
@@ -31,8 +25,8 @@ function Video(props) {
                         <h3>{ props.video.heading }</h3>
                     </Link>
                     <p>text text text text text text text</p> 
-                    <div id="like" className="like-button" onClick={like}>
-                        <img src="https://icons.veryicon.com/png/o/miscellaneous/ui-basic-linear-icon/like-106.png"/>
+                    <div className="like-button">
+                        <img src="https://icons.veryicon.com/png/o/miscellaneous/ui-basic-linear-icon/like-106.png" alt="like"/>
                     </div>
                 </div>
             </div> 
