@@ -12,9 +12,15 @@ function RecPosts() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        let data = api.getRecVideos();
-        dispatch(setRecVideos(data));
+        api.getRecVideos().then(result => {
+            dispatch(setRecVideos(result.data));
+    	})
     }, []);
+
+    // useEffect(() => {
+    //     let data = api.getRecVideos();
+    //     dispatch(setRecVideos(data));
+    // }, []);
 
     return(
         <div className="posts">

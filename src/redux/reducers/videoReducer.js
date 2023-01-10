@@ -22,6 +22,7 @@ export const subVideosReducer = (state = initialState, { type, payload }) => {
     }
 };
 
+
 export const videoReducer = (state = {}, { type, payload }) => {
     switch (type) {
         case ActionTypes.SET_VIDEO:

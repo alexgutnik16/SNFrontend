@@ -15,8 +15,9 @@ function Search() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        let data = api.getRecVideos();
-        dispatch(setRecVideos(data));
+        api.getRecVideos().then(result => {
+            dispatch(setRecVideos(result.data));
+    	})
     }, []);
 
     const handleChange = (e) => {

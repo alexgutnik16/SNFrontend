@@ -20,8 +20,9 @@ function VideoDetail() {
 
     useEffect(() => {
         if (videoId && videoId !== "") {
-            let data = api.getComments(videoId)
-            dispatch(setComments(data))
+            api.getComments(videoId).then(result => {
+                dispatch(setComments(result.data));
+            })
         }
         return () => {
             dispatch(removeComments())
@@ -30,14 +31,35 @@ function VideoDetail() {
 
     useEffect(() => {
         if (videoId && videoId !== "") {
-            let data = api.getVideo(videoId)
-            dispatch(setVideo(data))
+            api.getVideo(videoId).then(result => {
+                dispatch(setVideo(result.data));
+            })
         }
         return () => {
             dispatch(removeVideo())
         };
     }, [videoId]);
 
+    // useEffect(() => {
+    //     if (videoId && videoId !== "") {
+    //         let data = api.getComments(videoId)
+    //         dispatch(setComments(data))
+    //     }
+    //     return () => {
+    //         dispatch(removeComments())
+    //     };
+    // }, [videoId]);
+
+    // useEffect(() => {
+    //     if (videoId && videoId !== "") {
+    //         let data = api.getVideo(videoId)
+    //         dispatch(setVideo(data))
+    //     }
+    //     return () => {
+    //         dispatch(removeVideo())
+    //     };
+    // }, [videoId]);
+    
     function like() {
         document.getElementById("like").style.backgroundColor = "#BB2649";
     }
@@ -53,20 +75,20 @@ function VideoDetail() {
                 <div className="video">
                     <div className="video-main">
                         <div className="video-user">
-                            <Link className="video-user-link" to={'/profile/' + video.videos.id}>
+                            <Link className="video-user-link" to={'/profile/' + video.videos.author.nickname}>
                                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/White_box_55x90.png/1280px-White_box_55x90.png" alt='avatar'></img> 
-                                <h2>{ video.videos.user }</h2>
+                                <h2>{ video.videos.author.nickname }</h2>
                             </Link>  
                             <button>Subscribe</button> 
                         </div>
                         <video width="750" height="500" controls preload="metadata">
-                            <source src={ video.videos.link } type="video/mp4"/>
+                            <source src={ video.videos.video } type="video/mp4"/>
                         </video> 
                     </div>
                     <div className="video-data">
                         <div className="video-info" >
                             <h3>{ video.videos.heading }</h3>
-                            <p>text text text text text text text</p> 
+                            <p>{ video.videos.text }t</p> 
                             <div id="like" className="like-button" onClick={like}>
                                 <img src="https://icons.veryicon.com/png/o/miscellaneous/ui-basic-linear-icon/like-106.png"/>
                             </div>
@@ -76,7 +98,7 @@ function VideoDetail() {
                                 <h2>No data</h2>
                             </div>
                         ) : (
-                            <Comments comments={comments} key={videoId}/>
+                            <Comments comments={comments} key={video.videos.id}/>
                         )}
                     </div> 
                 </div>

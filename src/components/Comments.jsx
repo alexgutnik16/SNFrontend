@@ -4,7 +4,7 @@ import '../styles/comments.css'
 
 function Comments(props) {
 
-    const comments = props.comments.comments.comments;
+    const comments = props.comments.comments;
     const [comment, setComment] = useState('');
 
     const handleChange = (e) => {
@@ -20,7 +20,7 @@ function Comments(props) {
                     onChange={ handleChange }
                 />
             </form>
-            {comments.map(comment => <p>{ comment }</p>)}  
+            {comments.map(comment => <p key={comment.id}> { comment.text } </p> )}  
         </div>
     )
 }

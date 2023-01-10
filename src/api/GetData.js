@@ -1,67 +1,144 @@
-import { videos, users, comments } from "./dataConstants";
+import axios from 'axios';
+import { users } from "./dataConstants";
+
+const API_URL = 'http://localhost:8000';
 
 const getRecVideos = () => {
-    return videos;
+    const url = `${API_URL}/network/api/get_rec_videos/`;
+    return axios.get(url).then(response => response.data);
 };
 
 const getSubVideos = () => {
-    return videos;
+    const url = `${API_URL}/network/api/get_sub_videos/`;
+    return axios.get(url).then(response => response.data);
 };
 
-const getVideo = (id) => {
-    switch (id) {
-        case '1':
-            return videos[0];
-        case '2':
-            return videos[1];
-        case '3':
-            return videos[2];
-        case '4':
-            return videos[3];
-        default:
-            return {};
-    };
+const getVideo = (videoId) => {
+    const url = `${API_URL}/network/api/get_video/${videoId}`;
+    return axios.get(url).then(response => response.data);
+}
+
+const postVideo = (video, heading, text) => {
+    const url = `${API_URL}/network/api/get_rec_videos/`;
+    return axios.post(url, video, heading, text);
+}
+
+const deleteVideo = (videoId) => {
+    const url = `${API_URL}/network/api/get_video/${videoId}`;
+    return axios.delete(url);
+}
+
+const getUser = (username) => {
+    const url = `${API_URL}/network/api/get_profile/${username}`;
+    return axios.get(url).then(response => response.data);
+}
+
+const getComments = (videoId) => {
+    const url = `${API_URL}/network/api/get_comments/${videoId}`;
+    return axios.get(url).then(response => response.data);
 };
+
+const getComment = (commentId) => {
+    const url = `${API_URL}/network/api/get_comment/${commentId}`;
+    return axios.get(url).then(response => response.data);
+};
+
+const postComment = (videoId, text) => {
+    const url = `${API_URL}/network/api/get_comments/${videoId}`;
+    return axios.post(url, text);
+};
+
+const deleteComment = (commentId) => {
+    const url = `${API_URL}/network/api/get_comment/${commentId}`;
+    return axios.delete(url);
+};
+
+const getLikes = (videoId) => {
+    const url = `${API_URL}/network/api/get_likes/${videoId}`;
+    return axios.get(url).then(response => response.data);
+}
+
+const getLike = (likeId) => {
+    const url = `${API_URL}/network/api/get_like/${likeId}`;
+    return axios.get(url).then(response => response.data);
+}
+
+const postLike = (videoId) => {
+    const url = `${API_URL}/network/api/get_like/${videoId}`;
+    return axios.post(url);
+}
+
+const deleteLike = (likeId) => {
+    const url = `${API_URL}/network/api/get_like/${likeId}`;
+    return axios.delete(url);
+}
+
+const getSubscibtions = (videoId) => {
+    const url = `${API_URL}/network/api/get_subscribtions/${videoId}`;
+    return axios.get(url).then(response => response.data);
+}
+
+const getSubscibtion = (subscibtionId) => {
+    const url = `${API_URL}/network/api/get_subscribtion/${subscibtionId}`;
+    return axios.get(url).then(response => response.data);
+}
+
+const postSubscibtion = (videoId) => {
+    const url = `${API_URL}/network/api/get_subscribtions/${videoId}`;
+    return axios.post(url);
+}
+
+const deleteSubscibtion = (subscibtionId) => {
+    const url = `${API_URL}/network/api/get_subscribtion/${subscibtionId}`;
+    return axios.delete(url);
+}
+
+const getBans = (videoId) => {
+    const url = `${API_URL}/network/api/get_bans/${videoId}`;
+    return axios.get(url).then(response => response.data);
+}
+
+const getBan = (banId) => {
+    const url = `${API_URL}/network/api/get_ban/${banId}`;
+    return axios.get(url).then(response => response.data);
+}
+
+const postBan = (videoId) => {
+    const url = `${API_URL}/network/api/get_bans/${videoId}`;
+    return axios.post(url);
+}
+
+const deleteBan = (banId) => {
+    const url = `${API_URL}/network/api/get_ban/${banId}`;
+    return axios.delete(url);
+}
 
 const getUsers = () => {
     return users;
 };
 
-const getUser = (id) => {
-    switch (id) {
-        case '1':
-            return 'Alex';
-        case '2':
-            return 'Bob';
-        case '3':
-            return 'Tom';
-        case '4':
-            return 'Oleg';
-        default:
-            return '';
-    };
-};
-
-const getComments = (id) => {
-    switch (id) {
-        case '1':
-            return comments[0];
-        case '2':
-            return comments[1];
-        case '3':
-            return comments[2];
-        case '4':
-            return comments[3];
-        default:
-            return {};
-    };
-};
-
 export default {
-    getVideo,
-    getUser,
-    getUsers,
     getRecVideos,
     getSubVideos,
-    getComments
+    getVideo,
+    postVideo,
+    deleteVideo,
+    getUser,
+    getUsers,
+    getComments,
+    getComment,
+    postComment,
+    deleteComment,
+    getLikes,
+    getLike,
+    postLike,
+    deleteLike,
+    getSubscibtions,
+    getSubscibtion,
+    postSubscibtion,
+    deleteSubscibtion,
+    getBans,
+    getBan,
+    postBan,
+    deleteBan
 };

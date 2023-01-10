@@ -12,9 +12,15 @@ function SubPosts() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        let data = api.getSubVideos()
-        dispatch(setSubVideos(data))
+        api.getSubVideos().then(result => {
+            dispatch(setSubVideos(result.data));
+    	})
     }, []);
+
+    // useEffect(() => {
+    //     let data = api.getSubVideos()
+    //     dispatch(setSubVideos(data))
+    // }, []);
 
     return(
         <div className="posts">

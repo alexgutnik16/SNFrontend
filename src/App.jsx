@@ -21,7 +21,7 @@ function App() {
                 <Route path="/" element={<RecPosts/>} />
                 <Route path='/subposts' element={<SubPosts/>}/>
                 <Route path='/search' element={<Search/>}/>
-                <Route path='/profile/:userId' element={<Profile/>}/>
+                <Route path='/profile/:username' element={<Profile/>}/>
                 <Route path='/video_detail/:videoId' element={<VideoDetail/>}/>
                 <Route path='/upload' element={<Upload/>}/>
             </Routes>

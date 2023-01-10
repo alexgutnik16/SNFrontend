@@ -9,14 +9,15 @@ import "../styles/header.css"
 function Header() {
     const [loggedIn, setloggedIn] = useState(false);
 
-    let testId = '1'
+    let testId = 'Alex'
     let currentUser = useSelector((state) => state.currentUser.currentUser);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        let data = api.getUser(testId);
-        dispatch(setCurrentUser(data));
-        setloggedIn(true);
+        api.getUser(testId).then(result => {
+            dispatch(setCurrentUser(result.data));
+            setloggedIn(true);
+        })
     }, []);
 
     function openNav() {

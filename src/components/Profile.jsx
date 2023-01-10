@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from 'react-router-dom';
 import { useSelector } from "react-redux";
 
@@ -8,20 +8,27 @@ import "../styles/profile.css"
 
 function Profile() {
 
+    const [profile, setProfile] = useState([]);
+
     let currentUser = useSelector((state) => state.currentUser.currentUser);
-    let { userId } = useParams();
-  
-    let data = api.getUser(userId);
+    let { username } = useParams();
+
+    useEffect(() => {
+        api.getUser(username).then(result => {
+            setProfile(result.data);
+        })
+    }, []);
+
     let users = api.getUsers();
 
     return(
         <div className="user">
-            {(data === currentUser.nickname) ? (
+            {(profile.nickname === currentUser.nickname) ? (
                 <div className="profile">
                     <div className="profile-main">
                         <h3>My profile</h3>
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/White_box_55x90.png/1280px-White_box_55x90.png" alt='avatar'></img>
-                        <h2>{ data }</h2>
+                        <h2>{ profile.nickname }</h2>
                     </div>
                     <div className="profile-add">
                         <div className="profile-button">
@@ -66,12 +73,12 @@ function Profile() {
                     <div className="profile-main">
                         <h3>Profile</h3>
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/White_box_55x90.png/1280px-White_box_55x90.png" alt='avatar'></img>
-                        <h2>{ data }</h2>
+                        <h2>{ profile.nickname }</h2>
                     </div>
                     <div className="profile-add">
                         <div className="profile-button">
                             <Link to='/'>
-                                <button>Text { data }</button>
+                                <button>Text { profile.nickname  }</button>
                             </Link>
                         </div>
                         <div className="subscribtions">
