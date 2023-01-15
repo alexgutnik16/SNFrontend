@@ -17,11 +17,6 @@ function SubPosts() {
     	})
     }, []);
 
-    // useEffect(() => {
-    //     let data = api.getSubVideos()
-    //     dispatch(setSubVideos(data))
-    // }, []);
-
     return(
         <div className="posts">
             {subVideos.map(video => <Video video={video} key={video.id}/>)}

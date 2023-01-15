@@ -77,8 +77,8 @@ function Profile() {
                     </div>
                     <div className="profile-add">
                         <div className="profile-button">
-                            <Link to='/'>
-                                <button>Text { profile.nickname  }</button>
+                            <Link to={'/chat/' + profile.nickname + '_' + currentUser.nickname }>
+                                <button>Text { profile.nickname }</button>
                             </Link>
                         </div>
                         <div className="subscribtions">

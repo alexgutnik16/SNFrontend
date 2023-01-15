@@ -4,11 +4,16 @@ import App from './App';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+import axios from 'axios';
 
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
 import store from './redux/store';
+
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'x-csrftoken';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

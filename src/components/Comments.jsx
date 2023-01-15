@@ -8,7 +8,7 @@ function Comments(props) {
     const [comment, setComment] = useState('');
 
     const handleChange = (e) => {
-        setComment(e.tarhet.value);
+        setComment(e.target.value);
     }
 
     return(

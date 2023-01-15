@@ -8,6 +8,7 @@ import RecPosts from "./components/RecPosts";
 import Profile from "./components/Profile";
 import Search from "./components/Search";
 import Upload from "./components/Upload";
+import Chat from "./components/Chat";
 import ScrollToTop from "./components/ScrollToTop";
 
 import "./App.css";
@@ -24,6 +25,7 @@ function App() {
                 <Route path='/profile/:username' element={<Profile/>}/>
                 <Route path='/video_detail/:videoId' element={<VideoDetail/>}/>
                 <Route path='/upload' element={<Upload/>}/>
+                <Route path='/chat/:chatName' element={<Chat/>}/>
             </Routes>
         </Fragment>
   	);

@@ -2,6 +2,7 @@ import axios from 'axios';
 import { users } from "./dataConstants";
 
 const API_URL = 'http://localhost:8000';
+axios.defaults.withCredentials = true;
 
 const getRecVideos = () => {
     const url = `${API_URL}/network/api/get_rec_videos/`;
@@ -10,12 +11,14 @@ const getRecVideos = () => {
 
 const getSubVideos = () => {
     const url = `${API_URL}/network/api/get_sub_videos/`;
-    return axios.get(url).then(response => response.data);
+    // const response = axios.get(url, { 'withCredentials': true });
+    // console.log(response)
+    return axios.get(url, { 'withCredentials': true }).then(response => response.data);
 };
 
 const getVideo = (videoId) => {
     const url = `${API_URL}/network/api/get_video/${videoId}`;
-    return axios.get(url).then(response => response.data);
+    return axios.get(url, { 'withCredentials': true }).then(response => response.data);
 }
 
 const postVideo = (video, heading, text) => {
@@ -30,17 +33,17 @@ const deleteVideo = (videoId) => {
 
 const getUser = (username) => {
     const url = `${API_URL}/network/api/get_profile/${username}`;
-    return axios.get(url).then(response => response.data);
+    return axios.get(url, { 'withCredentials': true }).then(response => response.data);
 }
 
 const getComments = (videoId) => {
     const url = `${API_URL}/network/api/get_comments/${videoId}`;
-    return axios.get(url).then(response => response.data);
+    return axios.get(url, { 'withCredentials': true }).then(response => response.data);
 };
 
 const getComment = (commentId) => {
     const url = `${API_URL}/network/api/get_comment/${commentId}`;
-    return axios.get(url).then(response => response.data);
+    return axios.get(url, { 'withCredentials': true }).then(response => response.data);
 };
 
 const postComment = (videoId, text) => {
@@ -55,7 +58,7 @@ const deleteComment = (commentId) => {
 
 const getLikes = (videoId) => {
     const url = `${API_URL}/network/api/get_likes/${videoId}`;
-    return axios.get(url).then(response => response.data);
+    return axios.get(url, { 'withCredentials': true }).then(response => response.data);
 }
 
 const getLike = (likeId) => {
@@ -75,7 +78,7 @@ const deleteLike = (likeId) => {
 
 const getSubscibtions = (videoId) => {
     const url = `${API_URL}/network/api/get_subscribtions/${videoId}`;
-    return axios.get(url).then(response => response.data);
+    return axios.get(url, { 'withCredentials': true }).then(response => response.data);
 }
 
 const getSubscibtion = (subscibtionId) => {
@@ -95,7 +98,7 @@ const deleteSubscibtion = (subscibtionId) => {
 
 const getBans = (videoId) => {
     const url = `${API_URL}/network/api/get_bans/${videoId}`;
-    return axios.get(url).then(response => response.data);
+    return axios.get(url, { 'withCredentials': true }).then(response => response.data);
 }
 
 const getBan = (banId) => {
@@ -111,6 +114,11 @@ const postBan = (videoId) => {
 const deleteBan = (banId) => {
     const url = `${API_URL}/network/api/get_ban/${banId}`;
     return axios.delete(url);
+}
+
+const getChat = (chatName) => {
+    const url = `${API_URL}/chat/api/get_lobby/${chatName}`;
+    return axios.get(url, { 'withCredentials': true }).then(response => response.data);
 }
 
 const getUsers = () => {
@@ -140,5 +148,6 @@ export default {
     getBans,
     getBan,
     postBan,
-    deleteBan
+    deleteBan,
+    getChat
 };
