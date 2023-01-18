@@ -11,8 +11,6 @@ const getRecVideos = () => {
 
 const getSubVideos = () => {
     const url = `${API_URL}/network/api/get_sub_videos/`;
-    // const response = axios.get(url, { 'withCredentials': true });
-    // console.log(response)
     return axios.get(url, { 'withCredentials': true }).then(response => response.data);
 };
 
@@ -21,14 +19,23 @@ const getVideo = (videoId) => {
     return axios.get(url, { 'withCredentials': true }).then(response => response.data);
 }
 
-const postVideo = (video, heading, text) => {
+const postVideo = (formData) => {
     const url = `${API_URL}/network/api/get_rec_videos/`;
-    return axios.post(url, video, heading, text);
+    return axios.post(url, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    });
 }
 
 const deleteVideo = (videoId) => {
     const url = `${API_URL}/network/api/get_video/${videoId}`;
     return axios.delete(url);
+}
+
+const getCurrentUser = () => {
+    const url = `${API_URL}/network/api/get_current_user/`;
+    return axios.get(url, { 'withCredentials': true }).then(response => response.data);
 }
 
 const getUser = (username) => {
@@ -67,7 +74,7 @@ const getLike = (likeId) => {
 }
 
 const postLike = (videoId) => {
-    const url = `${API_URL}/network/api/get_like/${videoId}`;
+    const url = `${API_URL}/network/api/get_likes/${videoId}`;
     return axios.post(url);
 }
 
@@ -76,8 +83,13 @@ const deleteLike = (likeId) => {
     return axios.delete(url);
 }
 
-const getSubscibtions = (videoId) => {
-    const url = `${API_URL}/network/api/get_subscribtions/${videoId}`;
+const getSubscibtions = (username) => {
+    const url = `${API_URL}/network/api/get_subscribtions/${username}`;
+    return axios.get(url, { 'withCredentials': true }).then(response => response.data);
+}
+
+const getSubscibed = (username) => {
+    const url = `${API_URL}/network/api/get_subscribed/${username}`;
     return axios.get(url, { 'withCredentials': true }).then(response => response.data);
 }
 
@@ -86,8 +98,8 @@ const getSubscibtion = (subscibtionId) => {
     return axios.get(url).then(response => response.data);
 }
 
-const postSubscibtion = (videoId) => {
-    const url = `${API_URL}/network/api/get_subscribtions/${videoId}`;
+const postSubscibtion = (username) => {
+    const url = `${API_URL}/network/api/get_subscribtions/${username}`;
     return axios.post(url);
 }
 
@@ -96,8 +108,8 @@ const deleteSubscibtion = (subscibtionId) => {
     return axios.delete(url);
 }
 
-const getBans = (videoId) => {
-    const url = `${API_URL}/network/api/get_bans/${videoId}`;
+const getBans = (username) => {
+    const url = `${API_URL}/network/api/get_bans/${username}`;
     return axios.get(url, { 'withCredentials': true }).then(response => response.data);
 }
 
@@ -106,8 +118,8 @@ const getBan = (banId) => {
     return axios.get(url).then(response => response.data);
 }
 
-const postBan = (videoId) => {
-    const url = `${API_URL}/network/api/get_bans/${videoId}`;
+const postBan = (username) => {
+    const url = `${API_URL}/network/api/get_bans/${username}`;
     return axios.post(url);
 }
 
@@ -121,18 +133,14 @@ const getChat = (chatName) => {
     return axios.get(url, { 'withCredentials': true }).then(response => response.data);
 }
 
-const getUsers = () => {
-    return users;
-};
-
 export default {
     getRecVideos,
     getSubVideos,
     getVideo,
     postVideo,
     deleteVideo,
+    getCurrentUser,
     getUser,
-    getUsers,
     getComments,
     getComment,
     postComment,
@@ -142,6 +150,7 @@ export default {
     postLike,
     deleteLike,
     getSubscibtions,
+    getSubscibed,
     getSubscibtion,
     postSubscibtion,
     deleteSubscibtion,

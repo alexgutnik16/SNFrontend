@@ -11,6 +11,8 @@ import '../styles/video.css';
 
 function VideoDetail() {
 
+    const baseUrl = 'http://127.0.0.1:8000';
+
     const { videoId } = useParams();
 
     let video = useSelector((state) => state.video);
@@ -39,29 +41,14 @@ function VideoDetail() {
             dispatch(removeVideo())
         };
     }, [videoId]);
-
-    // useEffect(() => {
-    //     if (videoId && videoId !== "") {
-    //         let data = api.getComments(videoId)
-    //         dispatch(setComments(data))
-    //     }
-    //     return () => {
-    //         dispatch(removeComments())
-    //     };
-    // }, [videoId]);
-
-    // useEffect(() => {
-    //     if (videoId && videoId !== "") {
-    //         let data = api.getVideo(videoId)
-    //         dispatch(setVideo(data))
-    //     }
-    //     return () => {
-    //         dispatch(removeVideo())
-    //     };
-    // }, [videoId]);
     
-    function like() {
-        document.getElementById("like").style.backgroundColor = "#BB2649";
+    const like = (postId) => {
+        api.postLike(postId)
+        // document.getElementById("like").style.backgroundColor = "#BB2649";
+    }
+
+    const subscribe = (userName) => {
+        api.postSubscibtion(userName);
     }
 
     return(
@@ -79,17 +66,17 @@ function VideoDetail() {
                                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/White_box_55x90.png/1280px-White_box_55x90.png" alt='avatar'></img> 
                                 <h2>{ video.videos.author.nickname }</h2>
                             </Link>  
-                            <button>Subscribe</button> 
+                            <button onClick={() => subscribe(video.videos.author.nickname)}>Subscribe</button> 
                         </div>
                         <video width="750" height="500" controls preload="metadata">
-                            <source src={ video.videos.video } type="video/mp4"/>
+                            <source src={ baseUrl + video.videos.video } type="video/mp4"/>
                         </video> 
                     </div>
                     <div className="video-data">
                         <div className="video-info" >
                             <h3>{ video.videos.heading }</h3>
                             <p>{ video.videos.text }t</p> 
-                            <div id="like" className="like-button" onClick={like}>
+                            <div id="like" className="like-button" onClick={() => like(video.videos.id)}>
                                 <img src="https://icons.veryicon.com/png/o/miscellaneous/ui-basic-linear-icon/like-106.png"/>
                             </div>
                         </div>

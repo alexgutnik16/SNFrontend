@@ -17,11 +17,6 @@ function RecPosts() {
     	})
     }, []);
 
-    // useEffect(() => {
-    //     let data = api.getRecVideos();
-    //     dispatch(setRecVideos(data));
-    // }, []);
-
     return(
         <div className="posts">
             {recVideos.map(video => <Video video={video} key={video.id}/>)}

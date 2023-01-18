@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from 'react-router-dom';
-import { useSelector } from "react-redux";
 
 import api from '../api/GetData';
 import "../styles/profile.css"
@@ -8,18 +7,48 @@ import "../styles/profile.css"
 
 function Profile() {
 
+    const [currentUser, setCurrentUser] = useState([]);
     const [profile, setProfile] = useState([]);
+    const [subscribtions, setSubscribtions] = useState([]);
+    const [subscribed, setSubscribed] = useState([]);
 
-    let currentUser = useSelector((state) => state.currentUser.currentUser);
     let { username } = useParams();
 
-    useEffect(() => {
-        api.getUser(username).then(result => {
+    const getCurrentUserData = () => {
+        api.getCurrentUser().then(result => {
+            setCurrentUser(result.data);
+        })
+    }
+
+    const getUserData = (nickname) => {
+        api.getUser(nickname).then(result => {
             setProfile(result.data);
         })
-    }, []);
+    }
 
-    let users = api.getUsers();
+    const getSubscibtionsData = (nickname) => {
+        api.getSubscibtions(nickname).then(result => {
+            setSubscribtions(result.data);
+        })
+    }
+
+    const getSubscibedData = (nickname) => {
+        api.getSubscibed(nickname).then(result => {
+            setSubscribed(result.data);
+        })
+    }
+
+    const ban = (userName) => {
+        console.log(userName)
+        api.postBan(userName);
+    }
+
+    useEffect(() => {
+        getCurrentUserData();
+        getUserData(username);
+        getSubscibtionsData(username);
+        getSubscibedData(username);
+    }, [username]);
 
     return(
         <div className="user">
@@ -38,30 +67,30 @@ function Profile() {
                         </div>
                         <div className="subscribtions">
                             <h2>Subscribtions</h2>
-                            {users.map(user =>
-                                <div key={user.id} className="subscribtion">
-                                    <Link className="video-user-link" to={'/profile/' + user.id}>
+                            {subscribtions.map(subscribtion =>
+                                <div key={subscribtion.id} className="subscribtion">
+                                    <Link className="video-user-link" to={'/profile/' + subscribtion.subscribed_to.nickname}>
                                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/White_box_55x90.png/1280px-White_box_55x90.png" alt='avatar'></img>
-                                        <p>{ user.nickname }</p>
+                                        <p>{ subscribtion.subscribed_to.nickname }</p>
                                     </Link>
                                     <div className="subscribtion-actions">
                                         <button>Subscribed</button>
-                                        <button>Ban</button>
+                                        <button onClick={() => ban(subscribtion.subscribed_to.nickname)}>Ban</button>
                                     </div>
                                 </div>
                             )}
                         </div>
                         <div className="subscribtions">
                             <h2>Subscribed</h2>
-                            {users.map(user =>
-                                <div key={user.id} className="subscribtion">
-                                    <Link className="video-user-link" to={'/profile/' + user.id}>
+                            {subscribed.map(subscribtion =>
+                                <div key={subscribtion.id} className="subscribtion">
+                                    <Link className="video-user-link" to={'/profile/' + subscribtion.subscriber.nickname}>
                                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/White_box_55x90.png/1280px-White_box_55x90.png" alt='avatar'></img>
-                                        <p>{ user.nickname }</p>
+                                        <p>{ subscribtion.subscriber.nickname }</p>
                                     </Link>
                                     <div className="subscribtion-actions">
-                                        <button>Subscribed</button>
-                                        <button>Ban</button>
+                                        <button>Subscribe</button>
+                                        <button onClick={() => ban(subscribtion.subscriber.nickname)}>Ban</button>
                                     </div>
                                 </div>
                             )}
@@ -83,30 +112,30 @@ function Profile() {
                         </div>
                         <div className="subscribtions">
                             <h2>Subscribtions</h2>
-                            {users.map(user =>
-                                <div key={user.id} className="subscribtion">
-                                    <Link className="video-user-link" to={'/profile/' + user.id}>
+                            {subscribtions.map(subscribtion =>
+                                <div key={subscribtion.id} className="subscribtion">
+                                    <Link className="video-user-link" to={'/profile/' + subscribtion.subscribed_to.nickname}>
                                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/White_box_55x90.png/1280px-White_box_55x90.png" alt='avatar'></img>
-                                        <p>{ user.nickname }</p>
+                                        <p>{ subscribtion.subscribed_to.nickname }</p>
                                     </Link>
                                     <div className="subscribtion-actions">
                                         <button>Subscribed</button>
-                                        <button>Ban</button>
+                                        <button onClick={() => ban(subscribtion.subscribed_to.nickname)}>Ban</button>
                                     </div>
                                 </div>
                             )}
                         </div>
                         <div className="subscribtions">
                             <h2>Subscribed</h2>
-                            {users.map(user =>
-                                <div key={user.id} className="subscribtion">
-                                    <Link className="video-user-link" to={'/profile/' + user.id}>
+                            {subscribed.map(subscribtion =>
+                                <div key={subscribtion.id} className="subscribtion">
+                                    <Link className="video-user-link" to={'/profile/' + subscribtion.subscriber.nickname}>
                                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/White_box_55x90.png/1280px-White_box_55x90.png" alt='avatar'></img>
-                                        <p>{ user.nickname }</p>
+                                        <p>{ subscribtion.subscriber.nickname }</p>
                                     </Link>
                                     <div className="subscribtion-actions">
-                                        <button>Subscribed</button>
-                                        <button>Ban</button>
+                                        <button>Subscribe</button>
+                                        <button onClick={() => ban(subscribtion.subscriber.nickname)}>Ban</button>
                                     </div>
                                 </div>
                             )}

@@ -8,8 +8,8 @@ const reducers = combineReducers({
     subVideos: subVideosReducer,
     video: videoReducer,
     comments: commentsReducer,
-    user: userReducer,
-    currentUser: currentUserReducer,
+    // user: userReducer,
+    // currentUser: currentUserReducer,
 });
 
 export default reducers;

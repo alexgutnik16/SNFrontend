@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
+import api from '../api/GetData';
 import '../styles/upload.css';
 
 
@@ -8,24 +10,30 @@ function Upload() {
     const [video, setVideo] = useState(null);
     const [heading, setHeading] = useState('');
     const [description, setDescription] = useState('');
+
+    const formData = new FormData();
+    formData.append("video", video);
+    formData.append("heading", heading);
+    formData.append("text", description);
+
+    let navigate = useNavigate();
  
     const handleFileChange = (e) => {
-        setVideo(e.target.files);
+        setVideo(e.target.files[0]);
     }
 
     const handleHeadingChange = (e) => {
-        setHeading(e.target.value)
+        setHeading(e.target.value);
     }
 
     const handleTextChange = (e) => {
-        setDescription(e.target.value)
+        setDescription(e.target.value);
     }
 
-    const onSubmit = (e) => {
+    const uploadVideo = (e) => {
         e.preventDefault();
-        console.log(video);
-        console.log(heading);
-        console.log(description);
+        api.postVideo(formData);
+        navigate('/');
     }
 
     return(
@@ -47,7 +55,7 @@ function Upload() {
                     placeholder="Description"
                     onChange={ handleTextChange }
                 />
-                <button onClick={ onSubmit }>Submit</button>
+                <button onClick={ uploadVideo }>Submit</button>
             </form>
         </div>
     )

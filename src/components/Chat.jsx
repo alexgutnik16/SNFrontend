@@ -16,6 +16,10 @@ function Chat() {
     	})
     }, []);
 
+    // const sendMessage = () => {
+
+    // }
+
     const handleChange = (e) => {
         setMessages(e.target.value);
     }
@@ -23,7 +27,7 @@ function Chat() {
     return(
         <div className="messages">
             <h2>{ chatName }</h2>
-            {messages.map(message => <p key={message.id}> { message.text } </p> )} 
+            {messages.map(message => <p key={message.id}>{ message.user.nickname }: { message.text } </p> )} 
             <form method="post">
                 <input type="text" 
                     name="text"

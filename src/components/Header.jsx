@@ -1,23 +1,23 @@
 import React, { useState, useEffect} from "react";
 import {Link, NavLink} from 'react-router-dom';
-import { useDispatch, useSelector } from "react-redux";
 
 import api from '../api/GetData';
-import { setCurrentUser } from "../redux/actions/userActions";
 import "../styles/header.css"
 
 function Header() {
+
+    const [currentUser, setCurrentUser] = useState([]);
     const [loggedIn, setloggedIn] = useState(false);
-
-    let testId = 'Alex'
-    let currentUser = useSelector((state) => state.currentUser.currentUser);
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        api.getUser(testId).then(result => {
-            dispatch(setCurrentUser(result.data));
+    
+    const getCurrentUserData = () => {
+        api.getCurrentUser().then(result => {
+            setCurrentUser(result.data);
             setloggedIn(true);
         })
+    }
+
+    useEffect(() => {
+        getCurrentUserData();
     }, []);
 
     function openNav() {
@@ -55,7 +55,7 @@ function Header() {
                 <div className="user">
                     {loggedIn ? (
                         <div className="user-logged-in">
-                            <Link className="userinfo" to={'/profile/' + testId}>
+                            <Link className="userinfo" to={'/profile/' + currentUser.nickname}>
                                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/White_box_55x90.png/1280px-White_box_55x90.png" alt='avatar'></img>
                                 <h3>{ currentUser.nickname }</h3>
                             </Link>
@@ -63,6 +63,7 @@ function Header() {
                         </div>
                     ) : (
                         <div className="user-logged-out">
+                            <button onClick={() => setloggedIn(true)}>Register</button>
                             <button onClick={() => setloggedIn(true)}>Log In</button>
                         </div>
                     )}
@@ -99,7 +100,7 @@ function Header() {
                         <div className="user">
                                 {loggedIn ? (
                                     <div className="user-logged-in">
-                                        <Link onClick={ closeNav } className="userinfo" to={'/profile/' + testId}>
+                                        <Link onClick={ closeNav } className="userinfo" to={'/profile/' + currentUser.nickname}>
                                             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/White_box_55x90.png/1280px-White_box_55x90.png" alt='avatar'></img>
                                             <h3>{ currentUser.nickname }</h3>
                                         </Link>

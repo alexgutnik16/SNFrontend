@@ -2,8 +2,8 @@ import { ActionTypes } from "../constants/actionTypes";
 
 const initialState = {
     currentUser: {
-        'id': 1,
-        'nickname': 'Alex'
+        'id': '',
+        'nickname': ''
     }
 };
 
